@@ -9,38 +9,47 @@ Badges: <BR><BR>
 [![GeoSMART Use Case](./book/img/use_case_badge.svg)](https://geo-smart.github.io/usecases)
 
 
-My name is Rob Fatland and among other things I advocate for extensively documenting one's process. 
-So... this writeup is how this Oceanography Book was assembled. The starting point is a template repo
-provided by the Geo-Smart organization. <br>
+I advocate for documenting process. Here is how the Geo-Smart organization 'simple skeleton' source 
+repository was used to create a Jupyter Book version of my oceanography work.<br>
 
 
 - I knew there were two templates available: The simple one (in use here) and a more comprehensive version
-    - The website to view these (plus existing books) is [here](https://geo-smart.github.io/usecases).
-- From the simple template I followed the directions (4 steps) in the README
-    - (1) Clicked "Use This Template"; named the new repository (appearing in my personal organization) **`oceanography`**
-        - Forked main branch only (the default checked option)
-        - I have an existing repository **`ocean`**: Will be the basis of this Jupyter book
-            - I am starting with a blank slate here
-    - Started editing this `README.md` to trace my steps
-    - (2) Edited `book/_config.yml` file to reflect this fork to `my-org/oceanography`
-        - Presumably this will get bounced back over to the geo-smart org: For a later day
+    - [Find links to these two templates here](https://geo-smart.github.io/usecases).
+- The 'simple' template gives directions on forking a new Jupyter Book in the `README.md` file.
+    - (1) Clicked "Use This Template"; name the new repo; choose the Geo-Smart organization; behold **`oceanography`**
+        - Forked the main branch only (the default checked option)
+            - I can see the value in doing something more complicated but I decline at this point to do so.
+        - My existing repository **`ocean`** will be the basis of this Book once the basics are sorted.
+        - I began editing this this `README.md` to trace my steps.
+    - (2) Edited `book/_config.yml` to reflect `oceanography`
     - (3) Settings --> Pages --> Source = GitHub Actions
         - To do (?): Enable github pages
     - (4) Edit `environment.yml` to establish a working environment
-        - How to create a proper **`environment.yml`**?
-            - Read up on Python and environments
-            - Install the `conda` package manager
+        - The pre-existing `environment.yml` contains what is needed to build the Jupyter Book
+            - Therefore do not clobber its contents!
+            - Rather: Plan to merge other content into this file...
+                - ...but only after successfully building a prototype Book
+                - How is this done?
+                    - At the top left of the GitHub console is a sequence of tabs: Code, Issues, Pull requests, Actions, ..., Settings
+                    - Up above I went to Settings > Pages > Source > enable Github Actions
+                    - *Now* I go to **`Actions`** and confirm a dialog about enabling workflow
+                    - When I trigger a build (for example by editing and committing the `README.md` file):
+                        - It fails because the default `environment.yml` file has `=10.3` etcetera: Out-of-date version specs
+                        - I edit this file and remove the version conditions for `python` and `jupyter-book`
+                        - The commit of this file triggers the build workflow
+                        - When this completes I can look at the published Book
+        - Expanding **`environment.yml`**?
+            - Read up on Python environments
+            - From a blank slate wor;Install the `conda` package manager
                 - I use `miniconda`
                 - I then install packages / libraries as needed
             - From a working (*activated*) environment: `conda env export > environment.yml`
                 - Analogous: `pip freeze` produces `requirements.txt`
 
 
-### Open questions
+### Remaining instructions / question
 
-- Jupyter notebooks go in the books/chapters folder
-    - One notebook per chapter
-    - Add chapter file paths to book/_toc.yml
-- Instructions are to enable github pages in the github repository, enable github pages
+- Jupyter notebooks go in the books/chapters folder: One notebook per chapter; add chapter file paths to book/_toc.yml
+- in the github repository, enable github pages
 - push all changes
 
