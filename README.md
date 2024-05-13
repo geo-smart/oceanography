@@ -10,8 +10,8 @@ Badges: <BR><BR>
 
 
 My name is Rob Fatland and among other things I advocate for extensively documenting one's process. 
-This here is how this Oceanography Book was assembled from a provided template: The Geo-Smart organization's 
-'simple skeleton' source repository.<br>
+So... this writeup is how this Oceanography Book was assembled. The starting point is a template repo
+provided by the Geo-Smart organization. <br>
 
 
 - I knew there were two templates available: The simple one (in use here) and a more comprehensive version
@@ -36,9 +36,11 @@ This here is how this Oceanography Book was assembled from a provided template: 
                 - Analogous: `pip freeze` produces `requirements.txt`
 
 
-### Remaining instructions / question
+### Open questions
 
-- Jupyter notebooks go in the books/chapters folder: One notebook per chapter; add chapter file paths to book/_toc.yml
-- in the github repository, enable github pages
+- Jupyter notebooks go in the books/chapters folder
+    - One notebook per chapter
+    - Add chapter file paths to book/_toc.yml
+- Instructions are to enable github pages in the github repository, enable github pages
 - push all changes
 
