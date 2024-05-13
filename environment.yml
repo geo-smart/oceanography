@@ -2,9 +2,9 @@ name: geosmart-template
 channels:
   - conda-forge
 dependencies:
-  - python=3.10
+  - python
   - sphinxcontrib-bibtex
-  - jupyter-book=0.13
+  - jupyter-book
   - jupytext
   - plotly
   - pandas
