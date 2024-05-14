@@ -7,6 +7,7 @@
 - This is the main branch README markdown file for the geo-smart oceanography repository.
     - Built from the [simple template](https://github.com/geo-smart/simple-template) (not the [more expansive template](https://github.com/geo-smart/use_case_template))
 - This repository (automatically) publishes to [this Jupyter Book website](https://geo-smart.github.io/oceanography).
+- A Jupyter Book is an extension of the Jupyter notebook concept and [the documentation on this is at JupyterBook.org](https://jupyterbook.org).
 - Here are related badges: <BR><BR>
 
 
@@ -80,6 +81,7 @@ repository was used to create a Jupyter Book version of my oceanography work.<br
 
 At this point the Book site is automatically compiling with every commit. The **`_config.yml`** file 
 has been modified and we have the subfolder **`/books/chapters`** where the notebooks will go.
+
 
 **Questions, procedures, issues:**
 
