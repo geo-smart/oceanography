@@ -1,6 +1,9 @@
 # Oceanography Jupyter Book
 
-Badges: <BR><BR>
+- This is the main branch README markdown file for the geo-smart oceanography repository.
+    - Built from the [simple template](https://github.com/geo-smart/simple-template) (not the [more expansive template](https://github.com/geo-smart/use_case_template))
+- This repository (automatically) publishes to [this Jupyter Book website](https://geo-smart.github.io/oceanography).
+- Here are related badges: <BR><BR>
 
 
 [![Deploy](https://github.com/geo-smart/use_case_template/actions/workflows/deploy.yaml/badge.svg)](https://github.com/geo-smart/use_case_template/actions/workflows/deploy.yaml)
