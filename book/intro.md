@@ -1,3 +1,3 @@
-# Welcome to the GeoSMART Jupyter Book!
+# Welcome to this Oceanography GeoSMART Jupyter Book
 
-**GeoS**cience **MA**chine Learning **R**esources and **T**raining (GeoSMART) framework provides an educational pathway that provides a foundation in open source scientific ecosystems and progresses through general ML theory, toolkits and deployment on Cloud computing.
+GeoSMART = **GeoS**cience **MA**chine Learning **R**esources and **T**raining. Th GeoSMART framework is about learning to build and work in an open source scientific ecosystem. Method emphasis includes machien learning, mastering existing toolkits and Cloud computing.
