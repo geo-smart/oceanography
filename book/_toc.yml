@@ -14,6 +14,7 @@ parts:
 
 - caption: Tutorial
   chapters:
+    - file: ocean_science
     - file: chapters/motivation
     - file: chapters/methods
     - file: chapters/data
