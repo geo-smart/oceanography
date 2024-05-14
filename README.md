@@ -1,5 +1,9 @@
 # Oceanography Jupyter Book
 
+
+## Preamble
+
+
 - This is the main branch README markdown file for the geo-smart oceanography repository.
     - Built from the [simple template](https://github.com/geo-smart/simple-template) (not the [more expansive template](https://github.com/geo-smart/use_case_template))
 - This repository (automatically) publishes to [this Jupyter Book website](https://geo-smart.github.io/oceanography).
@@ -12,13 +16,17 @@
 [![GeoSMART Use Case](./book/img/use_case_badge.svg)](https://geo-smart.github.io/usecases)
 
 
+## Building a working Jupyter Book
+
+
 I advocate for documenting process. Here is how the Geo-Smart organization 'simple skeleton' source 
 repository was used to create a Jupyter Book version of my oceanography work.<br>
 
 
 - I knew there were two templates available: The simple one (in use here) and a more comprehensive version
-    - [Find links to these two templates here](https://geo-smart.github.io/usecases).
-- The 'simple' template gives directions on forking a new Jupyter Book in the `README.md` file.
+    - [Links are provided by the 'use cases' website here](https://geo-smart.github.io/usecases).
+- The 'simple' template gives directions on forking a new Jupyter Book (in the template `README.md` file).
+    - These are reiterated here with some elaboration.
     - (1) Clicked "Use This Template"; name the new repo; choose the Geo-Smart organization; behold **`oceanography`**
         - Forked the main branch only (the default checked option)
             - I can see the value in doing something more complicated but I decline at this point to do so.
@@ -35,28 +43,50 @@ repository was used to create a Jupyter Book version of my oceanography work.<br
                 - As content is added: Add in other modules / libraries as needed
         - Did the test build work??? No! And here is why and how to fix it:
             - Top left of the GitHub console tabs: Code, Issues, Pull requests, Actions, ..., Settings
-            - Earlier: Settings > Pages > Source > enable Github Actions: Good
-            - *Now*: **`Actions`** and if necessary sign off (click) the dialog enabling workflow
-                - On the Actions page: I can trigger a build manually or via a commit
-                    - ...for example: Editing and commit this `README.md` file
-                - Build fails: `environment.yml` file has outdated version specs: `python=3.10` etcetera
-                    - Edit `environment.yml`: Remove version conditions for `python` and `jupyter-book`
-                    - The commit of this file triggers the build workflow
-                    - When completed: A link to the Book is given.
-        - Expanding **`environment.yml`**
-            - Read up on Python environments
-            - From a blank slate workstation: Install the `conda` package manager
-                - I use `miniconda`
-                - I then install packages / libraries as needed
-            - From a working (*activated*) environment: `conda env export > environment.yml`
-                - Analogous: `pip freeze` produces `requirements.txt`
-                - At this point one could wholesale copy-paste a very long library list
-                - Instead I am going to try and just add key libraries
+            - Earlier: **> Settings > Pages > Source > enable Github Actions**: Necessary, done.
+            - *Now*: **> `Actions`**
+                - The GitHub portal may request that you sign off on enabling workflow: ok.
+                - Trigger a Book build: Commit a change or start the build manually
+                - My issue when this Build failed: `environment.yml` outdated versions
+                    - Example: `python=3.10`
+                    - Solution: Edit `environment.yml` to remove versions
+                    - Example `python=3.10` becomes just `python`
+                    - Likewise for `jupyter-book`
+                    - Commit `environment.yml` and the Book now builds properly
+                    - Verify from the provided link
+        - In the next section I document expanding `environment.yml` as content is added
+            - In preparation for this phase I suggest
+                - Read about Python environments
+                - Work from a local clone of the repo
+                    - Outline of setup:
+                        - On a blank slate workstation install the `conda` package manager
+                            - I use `miniconda` rather than full `anaconda`
+                        - Clone the GitHub repository (*this*) using `git clone <URL>`
+                        - Create an environment and activate it
+                            - Include the activate command in an echo statement inside `.bashrc`
+                            - Remember to activate this environment every time logging in
+                        - Working locally: Install packages / libraries, develop content
+                            - This *expands* what the environment supports
+                        - Commit changes, check the resulting Book is correct
+            - Specific to `environment.yml`
+                - This file acts as a derived record of installed libraries for a given environment
+                    - From a working (*activated*) environment: `conda env export > environment.yml`
+                    - Analogous: `pip freeze` produces `requirements.txt`
+                    - At this point one could wholesale copy-paste a very long library list
+                    - Instead I am going to try a more minimalist approach; see notes below
 
 
-### Remaining instructions / question
+## Building out and testing the Book
 
-- Jupyter notebooks go in the books/chapters folder
-    - One notebook per chapter
-    - Add chapter file paths to book/_toc.yml
+At this point the Book site is automatically compiling with every commit. The **`_config.yml`** file 
+has been modified and we have the subfolder **`/books/chapters`** where the notebooks will go.
+
+**Questions, procedures, issues:**
+
+
+- Each **`.ipynb`** notebook maps to a book chapter
+- Chapter file paths are added to **`/book/_toc.yml`**
+    - What else is needed to get new content to appear? 
+- How much data can be bundled with the Book?
+- Where does static content like mp3 animations and images go? How is it referenced? 
 
