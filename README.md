@@ -23,33 +23,37 @@ repository was used to create a Jupyter Book version of my oceanography work.<br
         - I began editing this this `README.md` to trace my steps.
     - (2) Edited `book/_config.yml` to reflect `oceanography`
     - (3) Settings --> Pages --> Source = GitHub Actions
-        - To do (?): Enable github pages
+        - This turns on automatic regeneration of the book every time there is a repo commit
     - (4) Edit `environment.yml` to establish a working environment
-        - The pre-existing `environment.yml` contains what is needed to build the Jupyter Book
-            - Therefore do not clobber its contents!
-            - Rather: Plan to merge other content into this file...
-                - ...but only after successfully building a prototype Book
-                - How is this done?
-                    - At the top left of the GitHub console is a sequence of tabs: Code, Issues, Pull requests, Actions, ..., Settings
-                    - Up above I went to Settings > Pages > Source > enable Github Actions
-                    - *Now* I go to **`Actions`** and confirm a dialog about enabling workflow
-                    - When I trigger a build (for example by editing and committing the `README.md` file):
-                        - It fails because the default `environment.yml` file has `=10.3` etcetera: Out-of-date version specs
-                        - I edit this file and remove the version conditions for `python` and `jupyter-book`
-                        - The commit of this file triggers the build workflow
-                        - When this completes I can look at the published Book
-        - Expanding **`environment.yml`**?
+        - The template includes an `environment.yml` file needed to build the Jupyter Book
+            - Do not clobber this file!
+            - Rather these two steps:
+                - Test the build now (see note below) to verify the Book is created properly
+                - As content is added: Add in other modules / libraries as needed
+        - Did the test build work??? No! And here is why and how to fix it:
+            - Top left of the GitHub console tabs: Code, Issues, Pull requests, Actions, ..., Settings
+            - Earlier: Settings > Pages > Source > enable Github Actions: Good
+            - *Now*: **`Actions`** and if necessary sign off (click) the dialog enabling workflow
+                - On the Actions page: I can trigger a build manually or via a commit
+                    - ...for example: Editing and commit this `README.md` file
+                - Build fails: `environment.yml` file has outdated version specs: `python=3.10` etcetera
+                    - Edit `environment.yml`: Remove version conditions for `python` and `jupyter-book`
+                    - The commit of this file triggers the build workflow
+                    - When completed: A link to the Book is given.
+        - Expanding **`environment.yml`**
             - Read up on Python environments
-            - From a blank slate wor;Install the `conda` package manager
+            - From a blank slate workstation: Install the `conda` package manager
                 - I use `miniconda`
                 - I then install packages / libraries as needed
             - From a working (*activated*) environment: `conda env export > environment.yml`
                 - Analogous: `pip freeze` produces `requirements.txt`
+                - At this point one could wholesale copy-paste a very long library list
+                - Instead I am going to try and just add key libraries
 
 
 ### Remaining instructions / question
 
-- Jupyter notebooks go in the books/chapters folder: One notebook per chapter; add chapter file paths to book/_toc.yml
-- in the github repository, enable github pages
-- push all changes
+- Jupyter notebooks go in the books/chapters folder
+    - One notebook per chapter
+    - Add chapter file paths to book/_toc.yml
 
