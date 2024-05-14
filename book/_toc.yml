@@ -9,10 +9,10 @@ parts:
       url: https://geo-smart.github.io/index.html
     - title: Project Pythia Foundations
       url: https://foundations.projectpythia.org/landing-page.html
-    - title: About Use Case Library
+    - title: About the Geo-Smart Library
       file: chapters/about
 
-- caption: Tutorial
+- caption: Ocean Data Science
   chapters:
     - file: chapters/ocean_science
     - file: chapters/motivation
@@ -28,7 +28,7 @@ parts:
     - file: chapters/questions
     - file: chapters/troubleshooting
 
-- caption: Example Notebook
+- caption: Deprecated: Example notebook
   chapters:
     - file: chapters/example
 
