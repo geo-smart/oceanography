@@ -92,7 +92,8 @@ has been modified and we have the subfolder **`/books/chapters`** where the note
 - How much Python functionality is present in the Book?
 - LaTeX?
 - How much data can be bundled with the Book?
-- Where does static content -- mp3 animations, images -- go? How referenced?
-
-$\alpha = \sum_{i=1}^{n} i$ I doubt this works!
+- Where does static content -- mp4 animations, images -- go? How to reference in a chapter notebook?
+    - I placed an imagine in **`~/book/img`**
+    - I created a sub-folder section **`~/book/img/rca`** with organized content
+    - Referencing an image in both the above places: Works locally, gives a broken picture icon in the Book render
 
