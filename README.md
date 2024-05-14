@@ -84,9 +84,15 @@ has been modified and we have the subfolder **`/books/chapters`** where the note
 **Questions, procedures, issues:**
 
 
-- Each **`.ipynb`** notebook maps to a book chapter
-- Chapter file paths are added to **`/book/_toc.yml`**
-    - What else is needed to get new content to appear? 
+- Each **`.ipynb`** notebook maps to a book chapter: **`~/book/chapters/newchapter.ipynb`**.
+    - Create a new chapter entry in **`/book/_toc.yml`**
+        - This will look like **`    - file: chapters/newchapter`**
+- How does the Book environment develop along with increasing content?
+    - There is some crossover here with **binder** it seems
+- How much Python functionality is present in the Book?
+- LaTeX?
 - How much data can be bundled with the Book?
-- Where does static content like mp3 animations and images go? How is it referenced? 
+- Where does static content -- mp3 animations, images -- go? How referenced?
+
+$\alpha = \sum_{i=1}^{n} i$ I doubt this works!
 
