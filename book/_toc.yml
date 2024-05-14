@@ -28,7 +28,7 @@ parts:
     - file: chapters/questions
     - file: chapters/troubleshooting
 
-- caption: Deprecated: Example notebook
+- caption: Deprecated example notebook
   chapters:
     - file: chapters/example
 
