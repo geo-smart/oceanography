@@ -90,8 +90,11 @@ is a website *compiled* from that repo.
 - Each **`.ipynb`** notebook maps to a book chapter: **`~/book/chapters/newchapter.ipynb`**.
     - Create a new chapter entry in **`/book/_toc.yml`**
         - This will look like **`    - file: chapters/newchapter`**
+        - Corresponding to **`chapters/newchapter.ipynb`**
 - How does the Book environment develop along with increasing content?
-    - There is some crossover here with **binder** it seems
+    - First example error: `No module named 'matplotlib'`
+        - Notice the JupyterBook builds despite errors of this sort
+        - Added a `matplotlib` entry and an `xarray` entry to `environment.yml` fixed this error
 - How much Python functionality is present in the Book?
 - LaTeX?
 - How much data can be bundled with the Book?
