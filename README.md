@@ -17,73 +17,74 @@
 [![GeoSMART Use Case](./book/img/use_case_badge.svg)](https://geo-smart.github.io/usecases)
 
 
-## Building a working Jupyter Book
+## Build a working Jupyter Book: Get Started
 
 
-I advocate for documenting process. Here is how the Geo-Smart organization 'simple skeleton' source 
-repository was used to create a Jupyter Book version of my oceanography work.<br>
+I advocate for documenting process... so here is how I began with the Geo-Smart organization 'simple skeleton' 
+repository and built out an Oceanography JupyterBook. The important idea is that in addition to a repo there
+is a website *compiled* from that repo.
 
 
-- I knew there were two templates available: The simple one (in use here) and a more comprehensive version
-    - [Links are provided by the 'use cases' website here](https://geo-smart.github.io/usecases).
-- The 'simple' template gives directions on forking a new Jupyter Book (in the template `README.md` file).
-    - These are reiterated here with some elaboration.
-    - (1) Clicked "Use This Template"; name the new repo; choose the Geo-Smart organization; behold **`oceanography`**
-        - Forked the main branch only (the default checked option)
-            - I can see the value in doing something more complicated but I decline at this point to do so.
-        - My existing repository **`ocean`** will be the basis of this Book once the basics are sorted.
-        - I began editing this this `README.md` to trace my steps.
-    - (2) Edited `book/_config.yml` to reflect `oceanography`
-    - (3) Settings --> Pages --> Source = GitHub Actions
-        - This turns on automatic regeneration of the book every time there is a repo commit
+- There are two templates hosted by Geo-Smart on GitHub: A simple one and a more comprehensive version
+    - [Links: See 'use cases' here](https://geo-smart.github.io/usecases).
+- **Simple** template gives directions on building a new Jupyter Book: Template `README.md` file
+    - Click "Use This Template"
+        - Name a new repo; choose the Geo-Smart organization
+        - Fork the main branch (default)
+        - Breadcrumbs: This `README.md`
+    - Edit `book/_config.yml` to reflect the topic, again *oceanography*
+    - Settings > Pages > Source = GitHub Actions
+        - Every commit triggers a recompile of the website
     - (4) Edit `environment.yml` to establish a working environment
-        - The template includes an `environment.yml` file needed to build the Jupyter Book
-            - Do not clobber this file!
-            - Rather these two steps:
-                - Test the build now (see note below) to verify the Book is created properly
-                - As content is added: Add in other modules / libraries as needed
-        - Did the test build work??? No! And here is why and how to fix it:
+        - Template includes `environment.yml`: essential libraries for the Jupyter Book
+            - ***Do not clobber this file!***
+                - Test the build now (see below), verify the Book
+                - Add other libraries as needed
+                - Open question: Myst-nb? See below on image embed
+        - My test build failed
             - Top left of the GitHub console tabs: Code, Issues, Pull requests, Actions, ..., Settings
-            - Earlier: **> Settings > Pages > Source > enable Github Actions**: Necessary, done.
-            - *Now*: **> `Actions`**
-                - The GitHub portal may request that you sign off on enabling workflow: ok.
-                - Trigger a Book build: Commit a change or start the build manually
-                - My issue when this Build failed: `environment.yml` outdated versions
+            - Earlier: **> Settings > Pages > Source > enable Github Actions**: Done
+            - Fixing the website compile fail: **> `Actions`** tab
+                - GitHub may require workflow approval: Approve
+                - Trigger a build (compile): Commit a change or start it manually
+                - Build fail error message: `environment.yml` outdated versions
                     - Example: `python=3.10`
-                    - Solution: Edit `environment.yml` to remove versions
-                    - Example `python=3.10` becomes just `python`
-                    - Likewise for `jupyter-book`
-                    - Commit `environment.yml` and the Book now builds properly
-                    - Verify from the provided link
-        - In the next section I document expanding `environment.yml` as content is added
-            - In preparation for this phase I suggest
-                - Read about Python environments
-                - Work from a local clone of the repo
-                    - Outline of setup:
-                        - On a blank slate workstation install the `conda` package manager
-                            - I use `miniconda` rather than full `anaconda`
-                        - Clone the GitHub repository (*this*) using `git clone <URL>`
-                        - Create an environment and activate it
-                            - Include the activate command in an echo statement inside `.bashrc`
-                            - Remember to activate this environment every time logging in
-                        - Working locally: Install packages / libraries, develop content
-                            - This *expands* what the environment supports
-                        - Commit changes, check the resulting Book is correct
-            - Specific to `environment.yml`
-                - This file acts as a derived record of installed libraries for a given environment
-                    - From a working (*activated*) environment: `conda env export > environment.yml`
-                    - Analogous: `pip freeze` produces `requirements.txt`
-                    - At this point one could wholesale copy-paste a very long library list
-                    - Instead I am going to try a more minimalist approach; see notes below
+                    - Solution: Edit `environment.yml` to remove `=xx.yy` versions
+                    - Example `python=3.10` > `python`, and so for jupyter-book
+                    - Commit `environment.yml`: Book build ok
+        - The section below expands **`environment.yml`** modifications
+            - Read about Python environments
+            - clone the repo locally
+                - Sketch of setting up a local working Python environment:
+                    - Blank slate workstation: install **`miniconda`**
+                        - miniconda is lightweight and includes the `conda` package manager
+                    - **`git clone https://github.com/geo-smart/newbookreponame`
+                    - Create an environment and activate it
+                    - In case we forget: We include the `activate` command as a `.bashrc` echo
+                        - Activate this environment on each work session
+                        - Install libraries, develop content
+                            - This will introduce errors in the JupyterBook
+                            - ...because the environment is built from `environment.yml` which...
+                            - ...has not been updated yet. Continued below...
+                        - `environment.yml` is a derived record of installed libraries
+                            - From a working (*activated*) environment: `conda env export > environment.yml`
+                                - `pip freeze` is an analogous approach
+                            - Plan: Do not wholesale copy-paste `env.yml` into the GitHub repo.
+                            - Rather: Take a more minimalist approach; again see below
 
 
-## Building out and testing the Book
-
-At this point the Book site is automatically compiling with every commit. The **`_config.yml`** file 
-has been modified and we have the subfolder **`/books/chapters`** where the notebooks will go.
+## Building the JupyterBook: Content development
 
 
-**Questions, procedures, issues:**
+### So far
+
+- The Book builds / compiles with every commit
+- **`_config.yml`** has been modified
+- The subfolder **`/books/chapters`** is where notebooks go
+- The subfolder **`/books/img`** is where static visual content (`png` files) reside
+
+
+### Questions, procedures, issues
 
 
 - Each **`.ipynb`** notebook maps to a book chapter: **`~/book/chapters/newchapter.ipynb`**.
@@ -95,10 +96,11 @@ has been modified and we have the subfolder **`/books/chapters`** where the note
 - LaTeX?
 - How much data can be bundled with the Book?
 
+
 ### Inline images
 
-
-The following Python code will convert a `jpg` to `png` format:
+Per the JupyterBook documentation: HTML is not recommended so I will revert to markdown inlining of
+images. This does not seem to work for jpegs so convert `jpg` to `png` using Python:
 
 
 ```
@@ -106,11 +108,16 @@ from PIL import Image
 Image.open('revelle.jpg').save('revelle.png')
 ```
 
-Per the JupyterBook documentation: HTML is not recommended so I will revert to markdown inlining of
-images. This does not seem to work for jpegs so the above Python is a means of converting jpg to png.
 
-The template has a folder **`~/book/img`** so I added subfolders **`/rca/images/category`** and 
-**`/rca/animations/category`**.
+***Issue*** The corresponding basic markdown `![text](path_to_image.png)` works. A more sophisticated version
+seems to require Myst-nb (?) and does not seem to work natively. 
+
+
+To organize static content: **`~/book/img/`** += subfolders **`/rca/images/<category>`** and 
+**`/rca/animations/<category>`**.
+
+
+
 
 
 
