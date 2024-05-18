@@ -15,6 +15,11 @@ parts:
 - caption: Ocean Data Science
   chapters:
     - file: chapters/ocean_science
+    - file: chapters/rob/shallowprofiler
+    - file: chapters/rob/issues
+    - file: chapters/rob/anomaly
+    - file: chapters/rob/data
+    - file: chapters/rob/documentation
     - file: chapters/motivation
     - file: chapters/methods
     - file: chapters/data
