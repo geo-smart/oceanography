@@ -8,3 +8,4 @@ dependencies:
   - jupytext
   - plotly
   - pandas
+  - matplotlib
