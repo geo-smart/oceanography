@@ -16,6 +16,7 @@ parts:
   chapters:
     - file: chapters/ocean_science
     - file: chapters/rob/shallowprofiler
+    - file: chapters/rob/shallowprofiler_technical
     - file: chapters/rob/issues
     - file: chapters/rob/anomaly
     - file: chapters/rob/data
