@@ -1,3 +1,7 @@
+[Jupyter Book](https://geo-smart.github.io/oceanography/intro.html), [GitHub repo](https://github.com/geo-smart/oceanography).
+
+
+
 # Oceanography Jupyter Book
 
 

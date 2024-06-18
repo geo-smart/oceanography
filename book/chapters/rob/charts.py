@@ -5,6 +5,10 @@ from matplotlib import pyplot as plt
 from matplotlib import colors as mplcolors
 import numpy as np, pandas as pd, xarray as xr
 from numpy import datetime64 as dt64, timedelta64 as td64
+from ipywidgets import interact, widgets
+from traitlets import dlink
+
+from shallowprofiler import *
 
 warnings.filterwarnings('ignore')
 
@@ -111,3 +115,144 @@ def ChartTwoSensors(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, \
         else: axs[i].text(xlabel, ylabel, ascent_start_time)
         
     return fig, axs
+
+
+
+def BundleChart(profiles, date0, date1, time0, time1, wid, hgt, data, title):
+    '''
+    Create a bundle chart: Multiple profiles showing sensor/depth in ensemble.
+        date0   start / end of time range: date only, range is inclusive [date0, date1]
+        date1
+        time0   start / end time range for each day
+        time1       (this scheme permits selecting midnight or noon)
+        wid     figure size
+        hgt
+        data    a value from the data dictionary (5-tuple: includes range and color)
+        title   chart title
+        
+    profiles is a global DataFrame
+    '''
+    pidcs = GenerateTimeWindowIndices(profiles, date0, date1, time0, time1) # each index contributes a thread to the bundle
+    fig, ax = plt.subplots(figsize=(wid, hgt), tight_layout=True)
+    for i in range(len(pidcs)):
+        ta0, ta1 = profiles["a0t"][pidcs[i]], profiles["a1t"][pidcs[i]]          # [ta0, ta1] is this thread's time range (ascent)
+        ax.plot(data[0].sel(time=slice(ta0,  ta1)), data[1].sel(time=slice(ta0, ta1)), ms = 4., color=data[4], mfc=data[4])
+    ax.set(title = title)
+    ax.set(xlim = (data[2], data[3]), ylim = (-200, 0))
+    return ax
+
+
+def ShowStaticBundles(d, profiles):
+    '''creates bundle charts for Jan 2022, Oregon Slope Base'''
+    BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['do'], 'Dissolved Oxygen')
+    BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['temperature'], 'Temperature')
+    BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['density'], 'Density')
+    BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['salinity'], 'Salinity')
+    BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['chlora'], 'Chlorophyll A Fluorescence')
+    BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['fdom'], 'FDOM')
+    BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['bb'], 'Particulate Backscatter')
+    
+    return
+
+
+
+def BundleInteract(d, profiles, sensor_key, time_index, bundle_size):
+    '''
+    Consider a time range that includes many (e.g. 279) consecutive profiles. This function plots sensor data
+    within the time range. Choose the sensor using a dropdown. Choose the first profile using the start slider.
+    Choose the number of consecutive profiles to chart using the bundle slider. 
+    Details
+      - There is no support at this time for selecting midnight or noon profiles exclusively
+          - nitrate, ph and pco2 bundle charts will be correspondingly sparse
+      - There is a little bit of intelligence built in to the selection of ascent or descent
+          - most sensors measure on ascent or ascent + descent. pco2 and ph are descent only
+          - ph and pco2 still have a charting bug "last-to-first line" clutter: For some reason
+            the first profile value is the last value from the prior profile. There is a hack in
+            place ("i0") to deal with this.
+    '''
+    
+
+    (phase0, phase1, i0) = ('a0t', 'a1t', 0) if not (sensor_key == 'ph' or sensor_key == 'pco2') else ('d0t', 'd1t', 1)
+    
+    # print('  type(data):', type(data))
+    # print('  data[0]:', data[0])
+    # print('  len(data[0]):', len(data[0]))
+    # print('  len(data):', len(data))
+    print('BundleInteract() running...\n\n\n')
+    
+    # print('  type(data[0]):', type(data[0]))
+    # print('\n\n\n')
+    
+    # d = dict(data[0])
+    
+    # print('type(d):', type(d))
+    # print('\n\n\n')
+    
+    x      = d[sensor_key][0]
+    z      = d[sensor_key][1]
+    xlo    = d[sensor_key][2]
+    xhi    = d[sensor_key][3]
+    xtitle = sensor_names[sensor_key]
+    xcolor = d[sensor_key][4]
+
+    # This configuration code block is hardcoded to work with March 2021
+    date0, date1   = dt64('2022-01-01'), dt64('2022-02-01')
+    time0, time1   = td64(0, 'h'), td64(24, 'h')
+    wid, hgt       = 9, 6
+    x0, x1, z0, z1 = xlo, xhi, -200, 0
+    title          = xtitle
+    color          = xcolor
+    pidcs          = GenerateTimeWindowIndices(profiles, date0, date1, time0, time1)    # !!!!! either midn or noon, not both
+    nProfiles      = len(pidcs)
+    
+    fig, ax = plt.subplots(figsize=(wid, hgt), tight_layout=True)
+    iProf0 = time_index if time_index < nProfiles else nProfiles
+    iProf1 = iProf0 + bundle_size if iProf0 + bundle_size < nProfiles else nProfiles
+    for i in range(iProf0, iProf1):
+        pIdx = pidcs[i]
+        ta0, ta1 = profiles[phase0][pIdx], profiles[phase1][pIdx]
+        xi, zi = x.sel(time=slice(ta0,  ta1)), z.sel(time=slice(ta0, ta1))
+        ax.plot(xi[i0:], zi[i0:], ms = 4., color=color, mfc=color)
+    ax.set(title = title)
+    ax.set(xlim = (x0, x1), ylim = (z0, z1))
+
+    # Add text indicating the current time range of the profile bundle
+    # tString = str(p["ascent_start"][pIdcs[iProf0]])
+    # if iProf1 - iProf0 > 1: tString += '\n ...through... \n' + str(p["ascent_start"][pIdcs[iProf1-1]])
+    # ax.text(px, py, tString)
+    
+    plt.show()
+    return
+
+
+def BundleInteractor(d, profiles, continuous_update = False):
+    '''Set up three bundle-interactive charts, vertically. Independent sliders for choice of 
+    sensor, starting profile by index, and number of profiles in bundle. (90 profiles is about
+    ten days.) A fast machine can have cu = True to give a slider-responsive animation. Make
+    it False to avoid jerky 'takes forever' animation on less powerful machines.
+    '''
+    style = {'description_width': 'initial'}
+    
+    # data dictionary d{} keys:
+    optionsList = ['temperature', 'salinity', 'density', 'conductivity', 'do', 'chlora', 'fdom', 'bb', 'pco2', 'ph', 'par', 'nitrate']
+    
+    print('type(d):', type(d))
+    print('len(d):', len(d))
+    print('d["conductivity"]: is ok')
+    print()
+    print()
+    print()
+
+    interact(BundleInteract, d = [d],             \
+                             profiles = profiles, \
+                             sensor_key = widgets.Dropdown(options=optionsList,  value=optionsList[0], description='sensor'), \
+                             time_index = widgets.IntSlider(min=0, max=270, step=1, value=160,                    \
+                                                            layout=widgets.Layout(width='35%'),                   \
+                                                            continuous_update=False, description='bundle start',  \
+                                                            style=style),
+                             bundle_size = widgets.IntSlider(min=1, max=90, step=1, value=20,                     \
+                                                            layout=widgets.Layout(width='35%'),                   \
+                                                            continuous_update=False, description='bundle width',  \
+                                                            style=style))
+
+    return

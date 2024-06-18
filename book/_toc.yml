@@ -14,25 +14,19 @@ parts:
 
 - caption: Ocean Data Science
   chapters:
-    - file: chapters/ocean_science
+    - file: chapters/rob/ocean_science
     - file: chapters/rob/shallowprofiler
-    - file: chapters/rob/shallowprofiler_technical
-    - file: chapters/rob/issues
-    - file: chapters/rob/anomaly
     - file: chapters/rob/data
+    - file: chapters/rob/anomaly
+    - file: chapters/rob/argo
+    - file: chapters/rob/glodap
+    - file: chapters/rob/modis
+    - file: chapters/rob/roms
+    - file: chapters/rob/spectrophotometer
+    - file: chapters/rob/shallowprofiler_technical
     - file: chapters/rob/documentation
-    - file: chapters/motivation
-    - file: chapters/methods
-    - file: chapters/data
-    - file: chapters/development
-    - file: chapters/training
-    - file: chapters/evaluation
-    - file: chapters/workflow
-    - file: chapters/reproducibility
-    - file: chapters/conclusion
-    - file: chapters/todo
-    - file: chapters/questions
-    - file: chapters/troubleshooting
+    - file: chapters/rob/issues
+
 
 - caption: Example
   chapters:
