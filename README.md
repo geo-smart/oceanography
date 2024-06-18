@@ -23,6 +23,8 @@
 
 ## Build a working Jupyter Book: Get Started
 
+> Before diving in: If a commit is not producing a new version of the Book: Go to Actions to see what failed.
+
 
 I advocate for documenting process... so here is how I began with the Geo-Smart organization 'simple skeleton' 
 repository and built out an Oceanography JupyterBook. The important idea is that in addition to a repo there
