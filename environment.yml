@@ -8,6 +8,8 @@ dependencies:
   - jupytext
   - plotly
   - pandas
+  - matplotlib
+  - xarray
 
 
 
