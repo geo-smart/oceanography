@@ -23,7 +23,9 @@
 
 ## Build a working Jupyter Book: Get Started
 
-> Before diving in: If a commit is not producing a new version of the Book: Go to Actions to see what failed.
+> Before diving in a couple notes:
+> - Be sure to `pip install -U jupyter-book` on your local system.
+> - If a commit fails to produce an of the Book: Go to the GitHub Actions tab to read the fail diagnostic.
 
 
 I advocate for documenting process... so here is how I began with the Geo-Smart organization 'simple skeleton' 
