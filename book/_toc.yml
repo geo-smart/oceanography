@@ -18,6 +18,8 @@ parts:
     - file: chapters/rob/shallowprofiler
     - file: chapters/rob/data
     - file: chapters/rob/anomaly
+    - file: chapters/rob/anomaly2
+    - file: chapters/rob/anomaly3
     - file: chapters/rob/argo
     - file: chapters/rob/glodap
     - file: chapters/rob/modis
