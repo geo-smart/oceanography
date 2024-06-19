@@ -14,20 +14,20 @@ parts:
 
 - caption: Ocean Data Science
   chapters:
-    - file: chapters/rob/ocean_science
-    - file: chapters/rob/shallowprofiler
-    - file: chapters/rob/data
-    - file: chapters/rob/anomaly
-    - file: chapters/rob/anomaly2
-    - file: chapters/rob/anomaly3
-    - file: chapters/rob/argo
-    - file: chapters/rob/glodap
-    - file: chapters/rob/modis
-    - file: chapters/rob/roms
-    - file: chapters/rob/spectrophotometer
-    - file: chapters/rob/shallowprofiler_technical
-    - file: chapters/rob/documentation
-    - file: chapters/rob/issues
+    - file: chapters/ocean_science
+    - file: chapters/shallowprofiler
+    - file: chapters/data
+    - file: chapters/anomaly
+    - file: chapters/anomaly2
+    - file: chapters/anomaly3
+    - file: chapters/argo
+    - file: chapters/glodap
+    - file: chapters/modis
+    - file: chapters/roms
+    - file: chapters/spectrophotometer
+    - file: chapters/shallowprofiler_technical
+    - file: chapters/documentation
+    - file: chapters/issues
 
 
 - caption: Example
