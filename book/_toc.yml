@@ -20,6 +20,8 @@ parts:
     - file: chapters/anomaly
     - file: chapters/anomaly2
     - file: chapters/anomaly3
+    - file: chapters/annotation
+    - file: chapters/annotation2
     - file: chapters/argo
     - file: chapters/glodap
     - file: chapters/modis
