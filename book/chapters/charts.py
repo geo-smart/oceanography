@@ -149,8 +149,9 @@ def ShowStaticBundles(d, profiles):
     BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['density'], 'Density')
     BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['salinity'], 'Salinity')
     BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['chlora'], 'Chlorophyll A Fluorescence')
-    BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['fdom'], 'FDOM')
-    BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['bb'], 'Particulate Backscatter')
+    # These last two are not terribly illuminating
+    # BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['fdom'], 'FDOM')
+    # BundleChart(profiles, dt64('2022-01-01'), dt64('2022-02-01'), td64(0, 'h'), td64(24, 'h'), 8, 6, d['bb'], 'Particulate Backscatter')
     
     return
 

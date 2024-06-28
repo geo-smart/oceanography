@@ -75,12 +75,12 @@ sensors = [
 ['up', 'vel'], ['east', 'vel'], ['north', 'vel']]
 
 ranges = {
-'conductivity':(33.5,36.5),'density':(1022, 1028),'pressure':(0.,200.),'salinity':(31, 35),'temperature':(7, 14),
+'conductivity':(32.0,34.5),'density':(1024, 1028),'pressure':(0.,200.),'salinity':(32, 34),'temperature':(7, 11),
 'chlora':(0.,1.5),'bb':(0.00,0.006),'fdom':(0.5,4.5),
 'spkir412nm':(0.0, 15.0), 'spkir443nm':(0.0, 15.0), 'spkir490nm':(0.0, 15.0), 'spkir510nm':(0.0, 15.0), 'spkir555nm':(0.0, 15.0), 'spkir620nm':(0.0, 15.0), 'spkir683nm':(0.0, 15.0),
 'nitrate':(0., 35.),
 'pco2':(200.0, 1200.0),
-'do':(50.0, 400.),
+'do':(50.0, 300.),
 'par':(0.0, 300.),
 'ph':(7.6, 8.2),
 'up':(-0.4, 0.4),'east':(-0.4, 0.4),'north':(-0.4, 0.4)
