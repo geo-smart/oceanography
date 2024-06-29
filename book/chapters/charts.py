@@ -18,13 +18,14 @@ def day_of_month_to_string(d): return str(d) if d > 9 else '0' + str(d)
 
 def ChartSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z1=0.):
     """
-    Make a stack of charts with one horizontal axis.
-    The data are in DataArrays: A, Az. pIdcs are row indices for the profile
-    Dataframe, i.e. a choice of which profiles to plot by index. 
+    Make a stack of charts with one horizontal axis versus y-depth.
+    The data are in DataArrays A and Az. 
+    pIdcs are row indices of the profile Dataframe: A choice of which profiles to plot 
+      by index. The dataframe gives bounding times for the profile/mode selected. 
     
     p        pandas Dataframe of indexed profile timestamps
-    xrng     list of 2-lists: low-to-high values for the two sensors
-    pIdcs    indices within p to use in generating a sequence of paired charts
+    xrng     2-list: low, high values for the sensor
+    pIdcs    list of indices within p to use in generating a sequence of paired charts
     A        xarray Dataset: source data of type A
     Az       xarray Dataset: depth data for sensor A
     Albl     string: label for sensor A
@@ -51,7 +52,9 @@ def ChartSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z
     fig, axs = plt.subplots(ncharts, 1, figsize=(wid, hgt*ncharts), tight_layout=True)
 
     # profile table p has column headers 'a0z', 'a0t' and so on for r and d
-    #   We are interested in the time columns to constrain data selection
+    #   We are interested in the time columns to constrain data selection.
+    #   These correspond to which "leg" is stipulated: rest, ascent or descent.
+    #   Given these are versus-depth charts: the rest option doesn't make much sense.
     if   Aleg == 'rest':   keyA = ('r0t', 'r1t')
     elif Aleg == 'ascent': keyA = ('a0t', 'a1t')
     else:                  keyA = ('d0t', 'd1t')
@@ -59,7 +62,7 @@ def ChartSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z
   
     # The subsequent code is 'loop over charts: plot each chart: A'
     # For this we need both a profile index into the profile dataframe p (from the
-    #   passed list pidcs[] *and* a chart index 0, 1, 2, ... These are respectively 
+    #   pidcs[] list *and* a chart index 0, 1, 2, ... These are respectively 
     #   pidx and i.
     for i in range(ncharts):
         
@@ -71,26 +74,29 @@ def ChartSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z
         if do_one: axs.plot(    Ax, Ay, ms = 4., color=Acolor, mfc=Acolor)
         else:      axs[i].plot( Ax, Ay, ms = 4., color=Acolor, mfc=Acolor)
         
-        # axis ranges
+        # set the chart title
         if i == 0: 
             if do_one: axs.set(title = Albl + ' (' + Acolor + ')')
             else:      axs[i].set(title = Albl + ' (' + Acolor + ')')
 
         # Set axis ranges from passed list of pairs xrng[][]
-        if do_one: axs.set(    xlim = (xrng[0][0], xrng[0][1]), ylim = (z0, z1))
-        else:      axs[i].set(    xlim = (xrng[0][0], xrng[0][1]), ylim = (z0, z1))
+        if do_one: axs.set(    xlim = (xrng[0], xrng[1]), ylim = (z0, z1))
+        else:      axs[i].set( xlim = (xrng[0], xrng[1]), ylim = (z0, z1))
 
         # chart time label
-        ascent_start_time = 'Start UTC: ' + str(tA0)
+        profile_start_time = 'Start UTC: ' + str(tA0)
         delta_t = tA0-dt64(tA0.date())
-        if delta_t > midn0 and delta_t < midn1: ascent_start_time += " MIDNIGHT local"
-        if delta_t > noon0 and delta_t < noon1: ascent_start_time += " NOON local"
-        xlabel = xrng[0][0] + 0.2*(xrng[0][1] - xrng[0][0])
+        if delta_t > midn0 and delta_t < midn1: profile_start_time += " MIDNIGHT local"
+        if delta_t > noon0 and delta_t < noon1: profile_start_time += " NOON local"
+        xlabel = xrng[0] + 0.2*(xrng[1] - xrng[0])
         ylabel = -10
-        if do_one: axs.text(xlabel, ylabel, ascent_start_time)
-        else: axs[i].text(xlabel, ylabel, ascent_start_time)
+        if do_one: axs.text(xlabel, ylabel, profile_start_time)
+        else: axs[i].text(xlabel, ylabel, profile_start_time)
         
     return fig, axs
+
+def ChartOneSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z1=0.):
+    return ChartSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z1=0.)
 
 
 def ChartTwoSensors(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, \
