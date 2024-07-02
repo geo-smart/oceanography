@@ -17,6 +17,7 @@ parts:
     - file: chapters/ocean_science
     - file: chapters/shallowprofiler
     - file: chapters/data
+    - file: chapters/data2
     - file: chapters/anomaly
     - file: chapters/anomaly2
     - file: chapters/anomaly3
