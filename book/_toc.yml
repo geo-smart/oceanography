@@ -15,9 +15,8 @@ parts:
 - caption: Ocean Data Science
   chapters:
     - file: chapters/ocean_science
-    - file: chapters/shallowprofiler
     - file: chapters/data
-    - file: chapters/data2
+    - file: chapters/shallowprofiler
     - file: chapters/anomaly
     - file: chapters/anomaly2
     - file: chapters/anomaly3

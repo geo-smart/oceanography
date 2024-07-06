@@ -16,7 +16,7 @@ def day_of_month_to_string(d): return str(d) if d > 9 else '0' + str(d)
 print('\nJupyter Notebook running Python {}'.format(sys.version_info[0]))
 
 
-def ReadProfileMetadata(fnm = 'rca/profiles/osb/january2022.csv'):
+def ReadProfileMetadata(fnm = './data/rca/profiles/osb/january2022.csv'):
     """
     Profiles are saved in a CSV file as six events per row: Rest start, Rest end, Ascent start,
     Ascent end, Descent start, Descent end. Each event includes a time and depth. There is event

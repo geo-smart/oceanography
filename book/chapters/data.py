@@ -27,7 +27,7 @@ def ReformatDataFile(verbose=False):
     
     print('\n\nSpecify input NetCDF data file\n')
 
-    dataLoc         = os.getcwd() + '/../../../data/rca'                  # !!!!! adjusted relative path for
+    dataLoc         = os.getcwd() + '/data/rca'                  # !!!!! adjusted relative path for
     osb             = 'OregonSlopeBase'                                   #   repo relocated 'one layer down' (GeoSMART)
     oos             = 'OregonOffshore'
     axb             = 'AxialBase'
