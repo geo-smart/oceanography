@@ -16,6 +16,47 @@ def doy(theDatetime): return 1 + int((theDatetime - dt64(str(theDatetime)[0:4] +
 def dt64_from_doy(year, doy): return dt64(str(year) + '-01-01') + td64(doy-1, 'D')
 def day_of_month_to_string(d): return str(d) if d > 9 else '0' + str(d)
 
+
+def ProfilerDepthChart(t0, t1, fnm):
+    '''
+    This is a very hardcoded function that generates a two-day span of profiles with some
+    annotations indicating what is going on, particularly with midnight / noon profiles.
+    '''
+    ds = xr.open_dataset(fnm).sel(time=slice(dt64(t0), dt64(t1)))           # this is not profiler metadata. It is actual sensor data.
+    fig, axs = plt.subplots(figsize=(12,4), tight_layout=True)
+    axs.plot(ds.time, ds.z, marker='.', ms=11., color='k', mfc='r', linewidth='.0001')
+    axs.set(ylim = (-210., 0.), title='Shallow profiler depth over two days', ylabel='depth (m)', xlabel='Hours (UTM)')
+    axs.text(dt64('2021-12-31 22:15'), -184, 'AT')
+    axs.text(dt64('2021-12-31 22:05'), -193, 'REST')
+    axs.text(dt64('2022-01-01 07:40'), -205, 'midnight')
+    axs.text(dt64('2022-01-01 21:30'), -205, 'noon')
+    axs.text(dt64('2022-01-01 09:05'), -20, 'slow')
+    axs.text(dt64('2022-01-01 09:05'), -30, 'descent')
+    axs.text(dt64('2022-01-01 22:30'), -20, 'slow')
+    axs.text(dt64('2022-01-01 22:30'), -30, 'descent')
+    return True
+    
+
+def VisualizeProfiles(date_id, n_days, year_id, month_id, month_name, site_name, site_abbrev, datafnm):
+    '''
+    Plot profiles similar to ProfilerDepthChart: One day per row, supports many days, 
+    wider and simpler layout. This is a backup diagnostic tool for looking at longer 
+    time intervals. 
+    '''
+    ds = xr.open_dataset('./data/rca/sensors/' + site_abbrev + '/' + datafnm)
+    fig, axs = plt.subplots(n_days, 1, figsize=(15,n_days), tight_layout=True)
+    for i in range(n_days):
+        daystring = str(i+1) if i > 8 else '0' + str(i+1)
+        time0 = dt64(year_id + '-' + month_id + '-' + daystring + 'T00:00:00')
+        time1 = dt64(year_id + '-' + month_id + '-' + daystring + 'T23:59:59')
+        dsDay = ds.sel(time=slice(time0, time1))
+        axs[i].plot(dsDay.time, dsDay.z, marker='.', markersize=3., color='k')
+        axs[i].set(ylim = (-200., 0.))
+    print('...' + month_name + ' ' + str(year_id) + ' ' + site_name + ' daily profiles...')
+    return True
+
+
+
 def ChartSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z1=0.):
     """
     Make a stack of charts with one horizontal axis versus y-depth.
