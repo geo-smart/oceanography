@@ -16,12 +16,9 @@ parts:
   chapters:
     - file: chapters/ocean_science
     - file: chapters/data
-    - file: chapters/shallowprofiler
+    - file: chapters/epipelargosy
     - file: chapters/anomaly
-    - file: chapters/anomaly2
-    - file: chapters/anomaly3
     - file: chapters/annotation
-    - file: chapters/annotation2
     - file: chapters/argo
     - file: chapters/glodap
     - file: chapters/modis
