@@ -25,6 +25,7 @@ parts:
     - file: chapters/roms
     - file: chapters/spectrophotometer
     - file: chapters/shallowprofiler_technical
+    - file: chapters/dataloader
     - file: chapters/documentation
     - file: chapters/issues
 
