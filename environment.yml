@@ -12,6 +12,7 @@ dependencies:
   - xarray
   - ipywidgets
   - netcdf4
+  - s3fs
 
 
 

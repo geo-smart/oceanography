@@ -64,7 +64,7 @@ def GenerateTimeWindowIndices(profiles, date0, date1, time0, time1):
 
 
 sensors = [
-['conductivity', 'ctd'], ['density', 'ctd'], ['pressure', 'ctd'], ['salinity', 'ctd'], ['temperature', 'ctd'],
+['conductivity', 'ctd'], ['density', 'ctd'], ['pressure', 'ctd'], ['salinity', 'ctd'], ['temp', 'ctd'],
 ['chlora', 'fluor'], ['backscatter', 'fluor'], ['fdom', 'fluor'],
 ['spkir412nm', 'spkir'], ['spkir443nm', 'spkir'], ['spkir490nm', 'spkir'], ['spkir510nm', 'spkir'], ['spkir555nm', 'spkir'], ['spkir620nm', 'spkir'], ['spkir683nm', 'spkir'],
 ['nitrate', 'nitrate'],
@@ -75,7 +75,7 @@ sensors = [
 ['up', 'vel'], ['east', 'vel'], ['north', 'vel']]
 
 ranges = {
-'conductivity':(32.0,34.5),'density':(1024, 1028),'pressure':(0.,200.),'salinity':(32, 34),'temperature':(7, 11),
+'conductivity':(3.2,3.7),'density':(1024, 1028),'pressure':(0.,200.),'salinity':(32, 34),'temp':(7, 11),
 'chlora':(0.,1.5),'backscatter':(0.00,0.006),'fdom':(0.5,4.5),
 'spkir412nm':(0.0, 15.0), 'spkir443nm':(0.0, 15.0), 'spkir490nm':(0.0, 15.0), 'spkir510nm':(0.0, 15.0), 'spkir555nm':(0.0, 15.0), 'spkir620nm':(0.0, 15.0), 'spkir683nm':(0.0, 15.0),
 'nitrate':(0., 35.),
@@ -87,7 +87,7 @@ ranges = {
 }
 
 standard_deviations = {
-'conductivity':(0.1, 0.6),'density':(0., .3),'pressure':(0.,10.),'salinity':(.0, .4),'temperature':(.0, .7),
+'conductivity':(0.1, 0.6),'density':(0., .3),'pressure':(0.,10.),'salinity':(.0, .4),'temp':(.0, .7),
 'chlora':(0.0, 0.5),'backscatter':(0.0,0.003),'fdom':(0.0,0.7),
 'spkir412nm':(0.0, .5), 'spkir443nm':(0.0, .5), 'spkir490nm':(0.0, .5), 'spkir510nm':(0.0, .5), 'spkir555nm':(0.0, .5), 'spkir620nm':(0.0, .5), 'spkir683nm':(0.0, .5),
 'nitrate':(0., 4.),
@@ -99,7 +99,7 @@ standard_deviations = {
 }
 
 colors = {
-'conductivity':'xkcd:maroon','density':'xkcd:brick red','pressure':'xkcd:eggplant','salinity':'cyan','temperature':'red',
+'conductivity':'xkcd:maroon','density':'xkcd:brick red','pressure':'xkcd:eggplant','salinity':'cyan','temp':'red',
 'chlora':'green','backscatter':'xkcd:blood orange','fdom':'xkcd:olive drab',
 'spkir412nm':'black', 'spkir443nm':'black', 'spkir490nm':'black', 'spkir510nm':'black', 
 'spkir555nm':'black', 'spkir620nm':'black', 'spkir683nm':'black',
@@ -113,7 +113,7 @@ colors = {
 
 sensor_names = {
 'conductivity':'Conductivity','density':'Density (kg m-3)','pressure':'Pressure',
-'salinity':'Salinity','temperature':'Temperature (deg C)', 'temp':'Temperature (deg C)',
+'salinity':'Salinity','temp':'Temperature (deg C)',
 'chlora':'Chlorophyll-A','backscatter':'Particulate Backscatter','fdom':'Fluorescent DOM',
 'spkir412nm':'Spectral Irradiance 412nm',
 'spkir443nm':'Spectral Irradiance 443nm',
