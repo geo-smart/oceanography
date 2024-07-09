@@ -61,7 +61,11 @@ def GenerateTimeWindowIndices(profiles, date0, date1, time0, time1):
             if delta_t >= time0 and delta_t <= time1: pidcs.append(i)
     return pidcs
 
+def AssembleDataFilename(data_file_root_path, site, sensor, month, year): 
+    return data_file_root_path + '/' + site + '/' + sensor + '_' + month + '_' + year + '.nc'
 
+
+# This section: Data / metadata information concerning the variety of shallow profiler sensors
 
 sensors = [
 ['conductivity', 'ctd'], ['density', 'ctd'], ['pressure', 'ctd'], ['salinity', 'ctd'], ['temp', 'ctd'],
@@ -129,12 +133,6 @@ sensor_names = {
 'ph':'pH',
 'up':'Current: Vertical','east':'Current: East','north':'Current: North'
 }
-
-
-
-def AssembleDataFnm(site, instrument, time, sensor):
-    return 'rca/sensors/data/' + site + '_' + instrument + '_' + time + '_' + sensor + '.nc'
-
 
 
 def ReformatSpkirData(ds, output_fnm_base):
