@@ -139,6 +139,24 @@ def ChartSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z
 def ChartOneSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z1=0.):
     return ChartSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z1=0.)
 
+    
+def ChartSensorMeanStd(s, km, ks, kz, rm, rs, colorm, colors, wid, len, timelabel = ''):
+    """
+    Single chart, one profile: Superimpose sensor depth-averaged mean data with standard deviation.
+    This will use the same axis format: Vertical down is depth, horizontal is mean/std sensor value.
+    Data are in a single XArray Dataset 's' with keys 'km' and 'ks'; and 'kz' for depth. Respective 
+    range 2-tuples are in rm and rs. Colors as shown, chart size wid x len, timelabel to be printed on the chart.
+    """
+    fig, ax = plt.subplots(figsize=(wid, hgt), tight_layout=True)
+    axtwin  = ax.twiny()
+    ax.plot(s.km, s.kz, ms = 4., color=colorm, mfc=colorm)
+    axtwin.plot(s.ks, s.kz, ms = 4., color=colors, mfc=colors)
+    ax.set(title = 'Title')
+    ax.set(    xlim = (xrng[0][0], xrng[0][1]), ylim = (z0, z1))
+    axtwin.set(xlim = (xrng[1][0], xrng[1][1]), ylim = (z0, z1))
+    # time label here
+    return fig, ax
+
 
 def ChartTwoSensors(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, \
                                     B, Bz, Blbl, Bcolor, Bleg, \
