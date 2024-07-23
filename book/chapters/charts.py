@@ -140,7 +140,7 @@ def ChartOneSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200.
     return ChartSensor(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, wid, hgt, z0=-200., z1=0.)
 
     
-def ChartSensorMeanStd(s, km, ks, kz, rm, rs, colorm, colors, wid, len, timelabel = ''):
+def ChartSensorMeanStd(s, km, ks, kz, rm, rs, colorm, colors, wid, hgt, timelabel = ''):
     """
     Single chart, one profile: Superimpose sensor depth-averaged mean data with standard deviation.
     This will use the same axis format: Vertical down is depth, horizontal is mean/std sensor value.
