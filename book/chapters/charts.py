@@ -172,7 +172,8 @@ def ChartTwoSensors(p, xrng, pidcs, A, Az, Albl, Acolor, Aleg, \
     ncharts = len(pidcs)
     if ncharts > 100: ncharts = 100
     do_one = True if ncharts == 1 else False
-    print("Attempting", ncharts, "charts\n")
+    chart_case = 'chart' if do_one else 'charts'
+    print("Attempting", ncharts, chart_case, "\n")
 
     # ncharts x 1: charts in a vertical column
     fig, axs = plt.subplots(ncharts, 1, figsize=(wid, hgt*ncharts), tight_layout=True)

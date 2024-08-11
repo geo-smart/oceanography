@@ -14,7 +14,7 @@ parts:
 
 - caption: Ocean Data Science
   chapters:
-    - file: chapters/ocean_science
+    - file: chapters/oceanscience
     - file: chapters/data
     - file: chapters/epipelargosy
     - file: chapters/anomaly
@@ -24,8 +24,8 @@ parts:
     - file: chapters/modis
     - file: chapters/roms
     - file: chapters/spectrophotometer
-    - file: chapters/shallowprofiler_technical
     - file: chapters/dataloader
+    - file: chapters/technicalnotes
     - file: chapters/documentation
     - file: chapters/issues
 

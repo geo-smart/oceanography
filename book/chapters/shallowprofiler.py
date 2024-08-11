@@ -1,3 +1,18 @@
+# shallowprofiler.py module contents
+#   - imports / configuration
+#   - shallow profiler metadata
+#   - shallow profiler data access
+#   - shallow profiler sensor data dictionaries
+#   - shallow profiler specific sensor bespoke functions
+
+#############################
+#############################
+####
+#### Imports / Configuration
+####
+#############################
+#############################
+
 import os, sys, time, glob, warnings
 from os.path import join as joindir
 from IPython.display import clear_output
@@ -15,6 +30,14 @@ def day_of_month_to_string(d): return str(d) if d > 9 else '0' + str(d)
 
 print('\nJupyter Notebook running Python {}'.format(sys.version_info[0]))
 
+
+#############################
+#############################
+####
+#### Shallow Profiler Metadata
+####
+#############################
+#############################
 
 def ReadProfileMetadata(fnm = './data/rca/profiles/osb/january2022.csv'):
     """
@@ -61,11 +84,42 @@ def GenerateTimeWindowIndices(profiles, date0, date1, time0, time1):
             if delta_t >= time0 and delta_t <= time1: pidcs.append(i)
     return pidcs
 
-def AssembleDataFilename(data_file_root_path, site, sensor, month, year): 
+
+#############################
+#############################
+####
+#### Shallow Profiler Data Access
+####
+#############################
+#############################
+#
+# - to do: deprecate this: For example hi/lo/color > data dictionaries
+
+def AssembleShallowProfilerDataFilename(data_file_root_path, site, sensor, month, year): 
     return data_file_root_path + '/' + site + '/' + sensor + '_' + month + '_' + year + '.nc'
 
+def GetSensorTuple(s, f):
+    '''
+    Based on a sensor key and a filename: 
+      Return a 5-tuple: Two DataArrays (sensor, depth) plus range-lo, range-hi, default color string
+    Argument s is the sensor identifier string like 'temp'
+    Argument f is the source filename like './../data/osb_ctd_jan22_temperature.nc' 
+    '''
+    DA_sensor    = xr.open_dataset(f)[s]                # DataArray
+    DA_depth     = xr.open_dataset(f)['depth']          # DataArray
+    range_lo     = ranges[s][0]                         # expected numerical range of this sensor data
+    range_hi     = ranges[s][1]                         #   lo and high
+    sensor_color = colors[s]                            #   default chart color for this sensor
+    return (DA_sensor, DA_depth, range_lo, range_hi, sensor_color)
 
-# This section: Data / metadata information concerning the variety of shallow profiler sensors
+
+#############################
+#############################
+####
+#### Shallow Profiler Sensor Data Dictionaries
+####
+#############################
+#############################
 
 sensors = [
 ['conductivity', 'ctd'], ['density', 'ctd'], ['pressure', 'ctd'], ['salinity', 'ctd'], ['temp', 'ctd'],
@@ -133,6 +187,15 @@ sensor_names = {
 'ph':'pH',
 'up':'Current: Vertical','east':'Current: East','north':'Current: North'
 }
+
+
+#############################
+#############################
+####
+#### Shallow Profiler Specific Sensor Bespoke Functions
+####
+#############################
+#############################
 
 
 def ReformatSpkirData(ds, output_fnm_base):
