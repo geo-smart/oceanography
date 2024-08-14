@@ -17,14 +17,15 @@ def dt64_from_doy(year, doy): return dt64(str(year) + '-01-01') + td64(doy-1, 'D
 def day_of_month_to_string(d): return str(d) if d > 9 else '0' + str(d)
 
 
-def ProfilerDepthChart(t0, t1, fnm):
+def RenderShallowProfilerTwoDayDepthChart():
     '''
     This is a very hardcoded function that generates a two-day span of profiles with some
     annotations indicating what is going on, particularly with midnight / noon profiles.
     '''
-    ds = xr.open_dataset(fnm).sel(time=slice(dt64(t0), dt64(t1)))           # this is not profiler metadata. It is actual sensor data.
-    fig, axs = plt.subplots(figsize=(12,4), tight_layout=True)
-    axs.plot(ds.time, ds.z, marker='.', ms=11., color='k', mfc='r', linewidth='.0001')
+    t0, t1, fnm = '2022-01-01', '2022-01-03', './data/rca/sensors/osb/conductivity_jan_2022.nc'
+    ds          = xr.open_dataset(fnm).sel(time=slice(dt64(t0), dt64(t1)))
+    fig, axs    = plt.subplots(figsize=(12,4), tight_layout=True)
+    axs.plot(ds.time, -ds.depth, marker=',', ms=36., color='k', mfc='r', linewidth='.001')
     axs.set(ylim = (-210., 0.), title='Shallow profiler depth over two days', ylabel='depth (m)', xlabel='Hours (UTM)')
     axs.text(dt64('2021-12-31 22:15'), -184, 'AT')
     axs.text(dt64('2021-12-31 22:05'), -193, 'REST')
