@@ -10,24 +10,25 @@ parts:
     - title: Project Pythia Foundations
       url: https://foundations.projectpythia.org/landing-page.html
     - title: About the Geo-Smart Library
-      file: chapters/about
+      file: chapters/1.0about
 
 - caption: Ocean Data Science
   chapters:
-    - file: chapters/oceanscience
-    - file: chapters/epipelargosy
-    - file: chapters/anomaly
-    - file: chapters/annotation
-    - file: chapters/argo
-    - file: chapters/glodap
-    - file: chapters/modis
-    - file: chapters/roms
-    - file: chapters/spectrophotometer
-    - file: chapters/data
-    - file: chapters/dataloader
-    - file: chapters/technicalnotes
-    - file: chapters/documentation
-    - file: chapters/issues
+    - file: chapters/1.1oceanscience
+    - file: chapters/1.2epipelargosy
+    - file: chapters/1.3anomaly
+    - file: chapters/1.4annotation
+    - file: chapters/1.5argo
+    - file: chapters/1.6glodap
+    - file: chapters/1.7modis
+    - file: chapters/1.8roms
+    - file: chapters/1.9spectra
+    - file: chapters/2.1data
+    - file: chapters/2.2dataloader
+    - file: chapters/2.3technicalnotes
+    - file: chapters/2.4documentation
+    - file: chapters/2.5issues
+    - file: chapters/2.6resources
 
 
 - caption: Example
