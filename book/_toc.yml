@@ -15,7 +15,8 @@ parts:
 - caption: Ocean Data Science
   chapters:
     - file: chapters/1.1oceanscience
-    - file: chapters/1.2epipelargosy
+    - file: chapters/1.2.1epipelargosy
+    - file: chapters/1.2.2current
     - file: chapters/1.3anomaly
     - file: chapters/1.4annotation
     - file: chapters/1.5argo
