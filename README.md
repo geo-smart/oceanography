@@ -8,7 +8,8 @@
 ## Preamble
 
 
-- This is the main branch README markdown file for the geo-smart oceanography repository.
+- This is the main branch README markdown file for a book on oceanography
+    - This book is developed within the Geo-Smart geosciences organization
     - Built from the [simple template](https://github.com/geo-smart/simple-template) (not the [more expansive template](https://github.com/geo-smart/use_case_template))
 - This repository (automatically) publishes to [this Jupyter Book website](https://geo-smart.github.io/oceanography).
 - A Jupyter Book is an extension of the Jupyter notebook concept and [the documentation on this is at JupyterBook.org](https://jupyterbook.org).
