@@ -2,7 +2,7 @@ name: geosmart-template
 channels:
   - conda-forge
 dependencies:
-  - python=3
+  - python=3.12
   - sphinxcontrib-bibtex
   - jupyter-book
   - jupytext
